@@ -1,4 +1,4 @@
-import { useState, version } from 'react'
+import { useState } from 'react'
 
 import styled from 'styled-components'
 
@@ -35,7 +35,7 @@ const EmployeesAddFormWrapper = styled.div`
 `
 
 export const EmployeesAddForm = ({addEmployee}) => {
-  const [userInput, setUserInput] = useState({name: '', salary: ''})
+  let [userInput, setUserInput] = useState({name: '', salary: ''})
 
   const handleSubmit = event => {
     event.preventDefault()

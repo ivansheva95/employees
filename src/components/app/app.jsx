@@ -6,6 +6,8 @@ import { EmployeesList } from '../employees-list/employees-list'
 import styled from "styled-components"
 import { EmployeesAddForm } from '../employees-add-form/employees-add-form'
 import { useState } from 'react'
+import { randomId } from '../../utils/randomId'
+
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -23,28 +25,26 @@ const SearchPanelWrapper = styled.div`
 
 export const App = () => {
   const [data, setData] = useState([
-    {id: 1, name: 'Ivan S', salary: 5000, increase: true, rise: true},
-    {id: 2, name: 'Artem L', salary: 5000, increase: true, rise: true},
-    {id: 3, name: 'Jhon D', salary: 1000, increase: false, rise: false},
-    {id: 4, name: 'Mister B', salary: 800, increase: false, rise: false}
+    {id: randomId(), name: 'Ivan S', salary: 5000, increase: true, rise: true},
+    {id: randomId(), name: 'Artem L', salary: 5000, increase: true, rise: true},
+    {id: randomId(), name: 'Jhon D', salary: 1000, increase: false, rise: false},
+    {id: randomId(), name: 'Mister B', salary: 800, increase: false, rise: false}
   ])
-  const [employeeId, setEmployeeId] = useState(5),
-      [term, setTerm] = useState(''),
-      [filter, setFilter] = useState('all')
+    let [term, setTerm] = useState(''),
+        [filter, setFilter] = useState('all')
 
   const addEmployee = (name, salary) => {
     const newEmployee = {
-      id: employeeId,
+      id: randomId(),
       name,
       salary,
       increase: false,
       rise: false
     }
 
-    setEmployeeId(++employeeId)
-
     setData([...data, newEmployee])
   }
+
   const deleteEmployee = id => {
     setData([
       ...data.filter(element => element.id !== id)
@@ -81,6 +81,7 @@ export const App = () => {
   }
 
   const visibalData = searchEmployees(filterEmployees(data, filter), term)
+  
   return (
     <AppWrapper>
       <AppInfo allEmployees={data.length} riseEmployees={data.filter(element => element.increase).length}/>
